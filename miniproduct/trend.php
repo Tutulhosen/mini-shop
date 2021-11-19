@@ -4,7 +4,7 @@
 <html lang="en">
 
   
-<!-- Mirrored from themes.hody.co/html/comet/shop-3col.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 11 Jan 2017 09:50:52 GMT -->
+<!-- Mirrored from themes.hody.co/html/comet/shop-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 11 Jan 2017 09:51:25 GMT -->
 <head>
     <title>Comet | Creative Multi-Purpose HTML Template</title>
     <meta charset="UTF-8">
@@ -450,178 +450,242 @@
       </div>
     </header>
     <!-- End Navigation Bar-->
-    <section class="page-title parallax">
-      <div data-parallax="scroll" data-image-src="images/bg/19.jpg" class="parallax-bg"></div>
-      <div class="parallax-overlay">
-        <div class="centrize">
-          <div class="v-center">
-            <div class="container">
-              <div class="title center">
-                <h1 class="upper">Shop</h1>
-                <h4>Free Delivery Worldwide.</h4>
-                <hr>
-              </div>
-            </div>
-            <!-- end of container-->
-          </div>
-        </div>
-      </div>
-    </section>
     <section>
       <div class="container">
-        <div class="row">
-          <div class="col-md-3 hidden-sm hidden-xs">
-            <div class="sidebar">
-
-            <div class="widget">
-                <h6 class="upper">Search Shop</h6>
-                <form action="" method="GET">
-                  <input name="s" type="text" placeholder="Search.." class="form-control">
-                </form>
-              </div>
-
-              <div class="widget">
-                <h6 class="upper">Categories</h6>
-                <ul class="nav">
-                  <li><a href="?">All</a>
-                  </li>
-                  <li><a href="?cat=Men">Men</a>
-                  </li>
-                  <li><a href="?cat=Women">Women</a>
-                  </li>
-                  <li><a href="?cat=Kids">Kids</a>
-                  </li>
-                  <li><a href="?cat=Electronic">Electronic</a>
-                  </li>
-                  
-                </ul>
-              </div>
-              <!-- end of widget        -->
-              <div class="widget">
-                <h6 class="upper">Trending Products</h6>
+        <div class="single-product-details">
+          <div class="row">
+            <div class="col-md-6">
+              <div data-options="{&quot;animation&quot;: &quot;slide&quot;, &quot;controlNav&quot;: true}" class="flexslider nav-inside control-nav-dark">
+                <ul class="slides">
 
                 <?php 
-                $thumnl= connector()->query("SELECT * FROM products ORDER BY id DESC LIMIT 3");
+                
+                
+                if (isset($_GET['tnd'])) {
+                  $tnd= $_GET['tnd'];
 
-                if (isset($_GET['id'])) {
-                  $t=$_GET['id'];
-                  $thumnl= connector()->query("SELECT * FROM product WHERE slug= '$t'");
+                  $single_product_data= connector()->query("SELECT * FROM products WHERE id='$tnd'");
+
+                  $tnd_product= $single_product_data->fetch_object();
+
+
+
                 }
 
-                while($tmb= $thumnl->fetch_object()) :
+               
+                
+                
                 
                 ?>
-
-                <ul class="nav product-list">
                   <li>
-                    <div class="product-thumbnail">
-                      <img src="../assets/media/product/<?php echo $tmb->photo ?>" alt="">
-                    </div>
-                    <div class="product-summary"><a href="trend.php?tnd=<?php echo $tmb->id ?>"><?php echo $tmb-> name ?></a><span><?php echo $tmb->price ?></span>
-                    </div>
+                    <img src="../assets/media/product/<?php echo $tnd_product->photo; ?>" alt="">
                   </li>
-
-                  <?php endwhile; ?>
-
-                 
+                
                 </ul>
               </div>
-              <!-- end of widget          -->
-              
-              <!-- end of widget        -->
-              <div class="widget">
-                <h6 class="upper">Popular Tags</h6>
-                <div class="tags clearfix"><a href="#">Hipster</a><a href="#">Fashion</a><a href="#">Shirt</a><a href="#">Modern</a><a href="#">Vintage</a>
+            </div>
+            <div class="col-md-5 col-md-offset-1">
+              <div class="title mt-0">
+                <h2 style="font-size:30px;"><?php echo $tnd_product->name; ?><span class="red-dot"></span></h2>
+                
+              </div>
+              <div class="single-product-price">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <h3><del><?php echo $tnd_product->price; ?></del><span><?php echo $tnd_product->sprice; ?></span></h3>
+                  </div>
+                  <div class="col-xs-6 text-right"><span class="rating-stars">              <i class="ti-star full"></i><i class="ti-star full"></i><i class="ti-star full"></i><i class="ti-star full"></i><i class="ti-star"></i><span class="hidden-xs">(3 Reviews)</span></span>
+                  </div>
                 </div>
               </div>
-              <!-- end of widget      -->
+              <div class="single-product-desc">
+                <p><?php echo $tnd_product->description; ?></p>
+              </div>
+              <div class="single-product-add">
+                <form action="#" class="inline-form">
+                  <div class="input-group">
+                    <input type="number" placeholder="QTY" value="1" min="1" class="form-control"><span class="input-group-btn"><button type="button" class="btn btn-color">Add to Cart<i class="ti-bag"></i></button></span>
+                  </div>
+                </form>
+                
+              </div>
+              <a class="btn btn-primary btn-sm" href="index.php">show all</a>
+              <div class="single-product-list">
+                <ul>
+                  <li><span>Sizes:</span> S, M, L, XL</li>
+                  <li><span>Colors:</span> Blue, Red, Grey</li>
+                  <li><span>Category:</span><a href="#">Blazers</a>
+                  </li>
+                  <li><span>Tags:</span><a href="#">Outfit</a>-<a href="#">Jeans</a>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <!-- end of sidebar-->
           </div>
-          <div class="col-md-9">
-            <div class="shop-menu">
-              <div class="row">
-                <div class="col-sm-8">
-                  <h6 class="upper">Displaying 6 of 18 results</h6>
-                </div>
-                <div class="col-sm-4">
-                  <div class="form-select">
-                    <select name="type" class="form-control">
-                      <option selected="selected" value="">Sort By</option>
-                      <option value="">What's new</option>
-                      <option value="">Price high to low</option>
-                      <option value="">Price low to high</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <!-- end of row-->
+          <!-- end of row-->
+        </div>
+        <div class="product-tabs">
+          <ul role="tablist" class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#first-tab" role="tab" data-toggle="tab">Description</a>
+            </li>
+            <li role="presentation"><a href="#second-tab" role="tab" data-toggle="tab">Sizes</a>
+            </li>
+            <li role="presentation"><a href="#third-tab" role="tab" data-toggle="tab">Reviews (3)</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div id="first-tab" role="tabpanel" class="tab-pane active">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum hic doloribus dolore explicabo, a voluptate optio culpa, aut nulla voluptatem sit nam sed molestias adipisci! Eius nulla beatae, quidem quae. Praesentium eveniet ullam quos
+                accusamus, ea nemo cupiditate. Nemo harum sit, necessitatibus voluptates, sapiente dolorum minima, placeat explicabo consequuntur at neque deserunt.</p>
+              <p>Quidem illum, enim aut, minus nesciunt, distinctio inventore sunt autem numquam eveniet non asperiores unde! Corrupti modi minima doloremque, illum aperiam nemo.</p>
             </div>
-            <div class="container-fluid">
-              <div class="row">
-
-              <?php
-              
-              $product_data= all('products');
-
-              if (isset($_GET['cat'])) {
-                $cat= $_GET['cat'];
-                $product_data= connector()->query("SELECT * FROM products WHERE category='$cat'");
-              }
-
-              if (isset($_GET['s'])) {
-                $src= $_GET['s'];
-                $product_data= connector()->query("SELECT * FROM products WHERE name LIKE '%$src%'");
-              }
-
-              while($products= $product_data-> fetch_object()) :
-              
-              ?>
-
-
-                <div class="col-md-4 col-sm-6">
-                  <div class="shop-product">
-                    <div class="product-thumb">
-                      <a href="single.php?slug=<?php echo $products->slug; ?>">
-                        <img style="height: 300px;" src="../assets/media/product/<?php echo $products-> photo ?>" alt="">
-                      </a>
-                      <div class="product-overlay"><a href="#" class="btn btn-color-out btn-sm">Add To Cart<i class="ti-bag"></i></a>
+            <div id="second-tab" role="tabpanel" class="tab-pane">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th class="upper">Size</th>
+                    <th class="upper">Bust (CM)</th>
+                    <th class="upper">Waist (CM)</th>
+                    <th class="upper">Hips (CM)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>XS</td>
+                    <td>78</td>
+                    <td>60</td>
+                    <td>83</td>
+                  </tr>
+                  <tr>
+                    <td>S</td>
+                    <td>80</td>
+                    <td>62</td>
+                    <td>86</td>
+                  </tr>
+                  <tr>
+                    <td>M</td>
+                    <td>88</td>
+                    <td>65</td>
+                    <td>88</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div id="third-tab" role="tabpanel" class="tab-pane">
+              <div id="comments">
+                <ul class="comments-list">
+                  <li class="rating">
+                    <h5 class="upper">Jesse Pinkman - <span class="rating-stars"><i class="ti-star full"></i><i class="ti-star full"></i><i class="ti-star full"></i><i class="ti-star full"></i><i class="ti-star"></i></span></h5><span class="comment-date">Posted on 29 September at 10:41</span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo voluptatem quo sit. Sint fugit quidem totam similique suscipit animi veniam reiciendis, unde facere quia, optio, at ad possimus perferendis asperiores.</p>
+                  </li>
+                  <li class="rating">
+                    <h5 class="upper">Rust Cohle - <span class="rating-stars"><i class="ti-star full"></i><i class="ti-star full"></i><i class="ti-star full"></i><i class="ti-star full"></i><i class="ti-star"></i></span></h5><span class="comment-date">Posted on 29 September at 10:41</span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi aspernatur vero dolorum asperiores ratione obcaecati atque quidem aliquid dicta illo, quod, similique suscipit maiores, aperiam expedita cum. Ut fugiat, dolores.</p>
+                  </li>
+                  <li class="rating">
+                    <h5 class="upper">Arya Stark - <span class="rating-stars"><i class="ti-star full"></i><i class="ti-star full"></i><i class="ti-star full"></i><i class="ti-star full"></i><i class="ti-star full"></i></span></h5><span class="comment-date">Posted on 29 September at 10:41</span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi aspernatur vero dolorum asperiores ratione obcaecati atque quidem aliquid dicta illo, quod, similique suscipit maiores, aperiam expedita cum. Ut fugiat, dolores.</p>
+                  </li>
+                </ul>
+              </div>
+              <div id="respond">
+                <h5 class="upper">Leave a rating</h5>
+                <div class="comment-respond">
+                  <form class="comment-form">
+                    <div class="form-double">
+                      <div class="form-group">
+                        <input name="author" type="text" placeholder="Name" class="form-control">
+                      </div>
+                      <div class="form-group last">
+                        <input name="email" type="text" placeholder="Email" class="form-control">
                       </div>
                     </div>
-                    <div class="product-info">
-                      <h4 class="upper"><a href="#"><?php echo $products->name; ?></a></h4><span><?php echo $products->price; ?></span>
-                      <div class="save-product"><a href="#"><i class="icon-heart"></i></a>
+                    <div class="form-group">
+                      <div class="form-select">
+                        <select class="form-control">
+                          <option value="" selected="selected">Chose a rating</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
                       </div>
                     </div>
+                    <div class="form-group">
+                      <textarea placeholder="Comment" class="form-control"></textarea>
+                    </div>
+                    <div class="form-submit text-right">
+                      <button type="button" class="btn btn-color-out">Post Comment</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="related-products">
+          <h5 class="upper">Related Products</h5>
+          <div class="row">
+            <div class="col-md-3 col-sm-6">
+              <div class="shop-product">
+                <div class="product-thumb">
+                  <a href="#">
+                    <img src="images/shop/1.jpg" alt="">
+                  </a>
+                </div>
+                <div class="product-info">
+                  <h4 class="upper"><a href="#">Premium Notch Blazer</a></h4><span>$79.99</span>
+                  <div class="save-product"><a href="#"><i class="icon-heart"></i></a>
                   </div>
                 </div>
-
-                  <?php endwhile; ?>
-
               </div>
-              <!-- end of row-->
-              <ul class="pagination">
-                <li><a href="#" aria-label="Previous"><span aria-hidden="true"><i class="ti-arrow-left"></i></span></a>
-                </li>
-                <li class="active"><a href="#">1</a>
-                </li>
-                <li><a href="#">2</a>
-                </li>
-                <li><a href="#">3</a>
-                </li>
-                <li><a href="#">4</a>
-                </li>
-                <li><a href="#">5</a>
-                </li>
-                <li><a href="#" aria-label="Next"><span aria-hidden="true"><i class="ti-arrow-right"></i></span></a>
-                </li>
-              </ul>
-              <!-- end of pagination-->
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="shop-product">
+                <div class="product-thumb">
+                  <a href="#">
+                    <img src="images/shop/2.jpg" alt="">
+                  </a>
+                </div>
+                <div class="product-info">
+                  <h4 class="upper"><a href="#">Premium Suit Blazer</a></h4><span>$199.99</span>
+                  <div class="save-product"><a href="#"><i class="icon-heart"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="shop-product">
+                <div class="product-thumb">
+                  <a href="#">
+                    <img src="images/shop/3.jpg" alt="">
+                  </a>
+                </div>
+                <div class="product-info">
+                  <h4 class="upper"><a href="#">Vintage Sweatshirt</a></h4><span>$99.99</span>
+                  <div class="save-product"><a href="#"><i class="icon-heart"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="shop-product">
+                <div class="product-thumb">
+                  <a href="#">
+                    <img src="images/shop/4.jpg" alt="">
+                  </a>
+                </div>
+                <div class="product-info">
+                  <h4 class="upper"><a href="#">Longline Jersey Jacket</a></h4><span>$19.99</span>
+                  <div class="save-product"><a href="#"><i class="icon-heart"></i></a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- end of container-->
     </section>
     <!-- Footer-->
     <footer id="footer-widgets">
@@ -766,5 +830,5 @@
   </body>
 
 
-<!-- Mirrored from themes.hody.co/html/comet/shop-3col.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 11 Jan 2017 09:51:09 GMT -->
+<!-- Mirrored from themes.hody.co/html/comet/shop-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 11 Jan 2017 09:51:42 GMT -->
 </html>
